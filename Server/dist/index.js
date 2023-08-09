@@ -5,9 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const userRoute_js_1 = __importDefault(require("./routes/userRoute.js"));
+const database_js_1 = require("./database.js");
+(0, database_js_1.ConnectDB)();
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
+app.use("api/user", userRoute_js_1.default);
 app.get("/", (req, res) => {
     res.send("Express + TypeScript Server");
 });
