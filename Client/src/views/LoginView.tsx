@@ -18,7 +18,6 @@ import { useToast } from "@/components/ui/use-toast";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const formSchema = z.object({
   email: z.string().min(2).max(50),
   password: z.string().min(4).max(20),
@@ -45,6 +44,7 @@ export const LoginView = () => {
         title: "Login successfull",
         description: `Welcome back ${user?.name}`,
       });
+      localStorage.setItem("token", user?.token);
       navigate("/");
     }
   }, [user, message, error]);

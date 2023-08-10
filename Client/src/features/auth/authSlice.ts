@@ -3,8 +3,10 @@ import authService from "./authService";
 import { authSliceState } from "../../types/authTypes";
 import { UserType } from "../../types/userType";
 
+const user = JSON.parse(localStorage.getItem("user")) as UserType;
+
 const initState: authSliceState = {
-  user: null,
+  user: user || null,
   error: false,
   success: false,
   loading: false,
