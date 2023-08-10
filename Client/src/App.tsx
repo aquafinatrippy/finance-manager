@@ -1,25 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomeView } from "./views/HomeView";
 import { Header } from "./components/Header";
+import { LoginView } from "./views/LoginView";
 
 function App() {
   return (
     <Router>
-      <div className="bg-slate-100 min-h-screen">
+      <div className="bg-gray-900 min-h-screen">
         <Header />
 
-        <div className="container mx-auto px-4 py-8">
-          <Routes>
-            <Route path="/" element={<HomeView />} />
-            {/* Add more routes as needed */}
-          </Routes>
-        </div>
-
-        <footer className="bg-gray-200 py-4 mt-auto">
-          <div className="container mx-auto px-4">
-            {/* Your footer content can go here */}
+        <div className="flex justify-center items-center h-full">
+          <div className="container mx-auto px-4 py-8">
+            <Routes>
+              <Route path="/" element={<HomeView />} />
+              <Route path="/login" element={<LoginView />} />
+              {/* Add more routes as needed */}
+            </Routes>
           </div>
-        </footer>
+        </div>
       </div>
     </Router>
   );
