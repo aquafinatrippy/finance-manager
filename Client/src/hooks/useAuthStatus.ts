@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "./useRedux";
 
 export const useAuthStatus = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [loading, setloading] = useState(true);
-  const { user } = useSelector((state) => state.auth);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loading, setloading] = useState<boolean>(true);
+  const { user } = useAppSelector((state) => state.auth);
   useEffect(() => {
     if (user) {
       setLoggedIn(true);
@@ -13,6 +13,5 @@ export const useAuthStatus = () => {
     }
     setloading(false);
   }, [user]);
-
   return { loggedIn, loading };
 };

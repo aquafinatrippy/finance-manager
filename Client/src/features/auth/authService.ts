@@ -1,7 +1,7 @@
 import axios from "axios";
 import { UserType } from "../../types/userType";
 
-const API_URL = "/api/users";
+const API_URL = "/api/user";
 
 const register = async (userData: UserType) => {
   const response = await axios.post(API_URL, userData);

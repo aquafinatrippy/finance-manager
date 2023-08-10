@@ -1,5 +1,7 @@
+import { UserType } from "./userType";
+
 export interface authSliceState {
-  user: object | null;
+  user: UserType | null;
   error: boolean;
   success: boolean;
   loading: boolean;

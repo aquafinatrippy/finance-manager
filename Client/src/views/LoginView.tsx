@@ -6,13 +6,18 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
+import { login } from "../features/auth/authSlice";
+import { useToast } from "@/components/ui/use-toast";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const formSchema = z.object({
   email: z.string().min(2).max(50),
@@ -20,6 +25,30 @@ const formSchema = z.object({
 });
 
 export const LoginView = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { user, error, message, success } = useAppSelector(
+    (state) => state.auth
+  );
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Error with login",
+        description: message,
+      });
+    }
+    if (success || user) {
+      toast({
+        title: "Login successfull",
+        description: `Welcome back ${user?.name}`,
+      });
+      navigate("/");
+    }
+  }, [user, message, error]);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,7 +58,7 @@ export const LoginView = () => {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    dispatch(login(values));
   };
 
   return (
@@ -39,12 +68,12 @@ export const LoginView = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="username"
-            render={({ email }) => (
+            name="email"
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="User Email" {...email} />
+                  <Input placeholder="User Email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -52,12 +81,16 @@ export const LoginView = () => {
           />
           <FormField
             control={form.control}
-            name="username"
-            render={({ password }) => (
+            name="password"
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="User Password" {...password} />
+                  <Input
+                    type="password"
+                    placeholder="User Password"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
