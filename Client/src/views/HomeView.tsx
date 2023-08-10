@@ -1,3 +1,11 @@
+import { FinanceCard } from '../components/FinanceCard'
+import { FinancialOutput } from '../components/FinancialOutput'
+
 export const HomeView = () => {
-  return <div>home</div>;
-};
+  return (
+    <div>
+      <FinanceCard />
+      <FinancialOutput />
+    </div>
+  )
+}
