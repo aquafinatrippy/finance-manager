@@ -11,8 +11,7 @@ const RegisterUser = async (req: Request, res: Response) => {
   }
   const userExists = await User.findOne({ email });
   if (userExists) {
-    res.status(400);
-    throw new Error("User already exists");
+    res.status(400).json({ message: "User already exist" });
   }
   const salt = genSaltSync(10);
   const hashedPw = hashSync(password, salt);
@@ -30,8 +29,7 @@ const RegisterUser = async (req: Request, res: Response) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(401);
-    throw new Error("Failed to create user");
+    res.status(401).json({ message: "Error with creating account" });
   }
 };
 
