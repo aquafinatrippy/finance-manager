@@ -11,14 +11,10 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-
-const links = [
-  { text: 'Home', goTo: '/' },
-  { text: 'Login', goTo: '/login' },
-  { text: 'Register', goTo: '/register' },
-]
+import { useAppSelector } from '../hooks/useRedux'
 
 export const Header = () => {
+  const { user } = useAppSelector((state) => state.auth)
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -27,6 +23,15 @@ export const Header = () => {
       navigate(loc)
     }
   }
+
+  const links = [
+    ...(user
+      ? [{ text: 'Home', goTo: '/' }]
+      : [
+          { text: 'Login', goTo: '/login' },
+          { text: 'Register', goTo: '/register' },
+        ]),
+  ]
 
   return (
     <header className='bg-gray-800 py-4'>
