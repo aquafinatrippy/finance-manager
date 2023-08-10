@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from '@/components/ui/button'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import {
   DropdownMenu,
@@ -10,51 +10,51 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu'
 
 const links = [
-  { text: "Home", goTo: "/" },
-  { text: "Login", goTo: "/login" },
-];
+  { text: 'Home', goTo: '/' },
+  { text: 'Login', goTo: '/login' },
+  { text: 'Register', goTo: '/register' },
+]
 
 export const Header = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const changeLocation = (loc: string) => {
     if (loc !== location.pathname) {
-      navigate(loc);
+      navigate(loc)
     }
-  };
+  }
 
   return (
-    <header className="bg-gray-800 py-4">
-      <div className="container mx-auto flex justify-between items-center px-4">
-        <div className="flex items-center">
-          <nav className="space-x-4">
+    <header className='bg-gray-800 py-4'>
+      <div className='container mx-auto flex justify-between items-center px-4'>
+        <div className='flex items-center'>
+          <nav className='space-x-4'>
             {links.map(({ text, goTo }, index) => (
               <Button
                 key={index}
                 onClick={() => changeLocation(goTo)}
-                variant="ghost"
-              >
+                variant='ghost'>
                 {text}
               </Button>
             ))}
           </nav>
         </div>
-        <div className="flex items-center">
+        <div className='flex items-center'>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative">
+              <Button variant='ghost' className='relative'>
                 test
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end" forceMount>
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">shadcn</p>
-                  <p className="text-xs leading-none text-muted-foreground">
+            <DropdownMenuContent className='w-56' align='end' forceMount>
+              <DropdownMenuLabel className='font-normal'>
+                <div className='flex flex-col space-y-1'>
+                  <p className='text-sm font-medium leading-none'>shadcn</p>
+                  <p className='text-xs leading-none text-muted-foreground'>
                     m@example.com
                   </p>
                 </div>
@@ -81,9 +81,9 @@ export const Header = () => {
                 <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
               </DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>{" "}
+          </DropdownMenu>{' '}
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
