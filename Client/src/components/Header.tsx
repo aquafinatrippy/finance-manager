@@ -12,7 +12,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const links = [{ text: "Home", goTo: "/" }];
+const links = [
+  { text: "Home", goTo: "/" },
+  { text: "Login", goTo: "/login" },
+];
 
 export const Header = () => {
   const location = useLocation();
@@ -29,8 +32,14 @@ export const Header = () => {
       <div className="container mx-auto flex justify-between items-center px-4">
         <div className="flex items-center">
           <nav className="space-x-4">
-            {links.map((link) => (
-              <Button variant="ghost">{link.text}</Button>
+            {links.map(({ text, goTo }, index) => (
+              <Button
+                key={index}
+                onClick={() => changeLocation(goTo)}
+                variant="ghost"
+              >
+                {text}
+              </Button>
             ))}
           </nav>
         </div>
