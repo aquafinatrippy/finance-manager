@@ -5,6 +5,7 @@ export interface IFinance {
   description: string;
   total_amount: string;
   created_by: string;
+  type: string;
 }
 
 const financeSchema = new Schema<IFinance>(
@@ -21,6 +22,10 @@ const financeSchema = new Schema<IFinance>(
       required: true,
     },
     created_by: {
+      type: String,
+      required: true,
+    },
+    type: {
       type: String,
       required: true,
     },

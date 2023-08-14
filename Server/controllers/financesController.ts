@@ -8,7 +8,7 @@ export const createFinance = async (req: Request, res: Response) => {
     if (!user) {
       res.status(401).json({ message: "User not authenticated at creating" });
     }
-    const { title, total_amount } = req.body;
+    const { type, title, total_amount } = req.body;
     if (!title || !total_amount) {
       res.status(400).json({ message: "Please add required fields" });
     }
@@ -17,6 +17,7 @@ export const createFinance = async (req: Request, res: Response) => {
       description: req.body.description,
       created_by: req.user.id,
       total_amount,
+      type,
     });
     res.status(201).json(finance);
   } catch (error) {
@@ -59,11 +60,12 @@ export const updateFinance = async (req: Request, res: Response) => {
     if (!user) {
       res.status(401).json({ message: "User not authenticated at creating" });
     }
-    const { title, description, total_amount } = req.body;
+    const { title, description, total_amount, type } = req.body;
     const updatedFincance = await Finance.findByIdAndUpdate({
       title,
       description,
       total_amount,
+      type,
     });
     res.status(200).json(updatedFincance);
   } catch (error) {
