@@ -1,3 +1,31 @@
+import { useNavigate } from 'react-router-dom'
+import { Button } from '../@/components/ui/button'
+import { FinanceCard } from '../components/FinanceCard'
+import { FinancialOutput } from '../components/FinancialOutput'
+
 export const HomeView = () => {
-  return <div>home</div>;
-};
+  const navigate = useNavigate()
+
+  const dummyData = [
+    { sum: 400, title: 'Total Earning' },
+    { sum: 400, title: 'Total Spending' },
+    { sum: 400, title: 'Money left' },
+  ]
+
+  return (
+    <div>
+      <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+        {dummyData.map(({ sum, title }, index) => (
+          <FinanceCard sum={sum} title={title} key={index} />
+        ))}
+      </div>
+
+      <div className='mt-4'>
+        <Button onClick={() => navigate('/create-finance')} variant='ghost'>
+          Add expense
+        </Button>
+        <FinancialOutput />
+      </div>
+    </div>
+  )
+}
