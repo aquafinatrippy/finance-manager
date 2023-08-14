@@ -10,7 +10,7 @@ export const HomeView = () => {
   const dummyData = [
     { sum: 400, title: "Total Earning" },
     { sum: 400, title: "Total Spending" },
-    { sum: 400, title: "Money left" },
+    { sum: 400, title: "Free money" },
   ];
 
   return (
@@ -22,6 +22,12 @@ export const HomeView = () => {
       </div>
       <div className="h-80">
         <DataChart />
+      </div>
+      <div className="mt-4">
+        <Button onClick={() => navigate("/create-finance")} variant="ghost">
+          Add income
+        </Button>
+        <FinancialOutput />
       </div>
       <div className="mt-4">
         <Button onClick={() => navigate("/create-finance")} variant="ghost">
