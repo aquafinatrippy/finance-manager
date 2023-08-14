@@ -15,7 +15,7 @@ const authCheck = expressAsyncHandler(
         const decoded = jsonwebtoken.verify(
           token,
           process.env.JWT_SECRET ?? ""
-        );
+        ) as { id: string };
         req.user = await User.findById(decoded.id).select("-password");
         next();
       } catch (error) {
