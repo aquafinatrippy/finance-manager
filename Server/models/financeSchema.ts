@@ -1,23 +1,26 @@
 import { Schema, model } from "mongoose";
 
-interface IFinance {
-  name: string;
-  email: string;
-  password: string;
+export interface IFinance {
+  title: string;
+  description: string;
+  total_amount: string;
+  created_by: string;
 }
 
 const financeSchema = new Schema<IFinance>(
   {
-    name: {
+    title: {
       type: String,
-      required: [true, "Empty name"],
+      required: [true, "Title missing"],
     },
-    email: {
+    description: {
       type: String,
-      required: [true, "Empty email"],
-      unique: true,
     },
-    password: {
+    total_amount: {
+      type: String,
+      required: true,
+    },
+    created_by: {
       type: String,
       required: true,
     },
