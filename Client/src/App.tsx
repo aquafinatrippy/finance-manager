@@ -5,7 +5,8 @@ import { LoginView } from './views/LoginView'
 import { PrivateRoute } from './components/PrivateRoute'
 import { Toaster } from '@/components/ui/toaster'
 import { RegisterView } from './views/RegisterView'
-import { CreateFinance } from './views/CreateFinance'
+import { CreateIncome } from './views/CreateIncome'
+import { CreateExpense } from './views/CreateExpense'
 
 function App() {
   return (
@@ -20,8 +21,11 @@ function App() {
               </Route>
               <Route path='/login' element={<LoginView />} />
               <Route path='/register' element={<RegisterView />} />
-              <Route path='/create-finance' element={<PrivateRoute />}>
-                <Route path='/create-finance' element={<CreateFinance />} />
+              <Route path='/create-income' element={<PrivateRoute />}>
+                <Route path='/create-income' element={<CreateIncome />} />
+              </Route>
+              <Route path='/create-expense' element={<PrivateRoute />}>
+                <Route path='/create-expense' element={<CreateExpense />} />
               </Route>
             </Routes>
           </div>
